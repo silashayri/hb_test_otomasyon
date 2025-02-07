@@ -21,6 +21,15 @@ public class ProductDetailPage {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
+    public void waitForElement(String Time){
+        try{
+            Thread.sleep(Long.parseLong(Time));
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 
     public String getProductPrice() throws InterruptedException {
         Thread.sleep(7000);
@@ -35,12 +44,12 @@ public class ProductDetailPage {
 
     }
 
-    public void addToCart() throws InterruptedException {
-        Thread.sleep(5000);
+    public void addToCart() {
+        waitForElement(String.valueOf(5000));
         addToCartButton.click();
-        Thread.sleep(6000);
+//        Thread.sleep(6000);
         goToCartButton.click();
-        Thread.sleep(5000);
+//        Thread.sleep(5000);
 
     }
 } 

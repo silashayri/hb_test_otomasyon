@@ -26,15 +26,21 @@ public class TabletPage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         PageFactory.initElements(driver, this);
     }
+    public void clickElement(WebElement element){
+        wait.until(ExpectedConditions.elementToBeClickable(element)).click();
 
-    public void selectFilters() throws InterruptedException {
-        Thread.sleep(3000);
+    }
+
+    public void selectFilters()  {
+        ProductDetailPage productpage= new ProductDetailPage(driver);
+        productpage.waitForElement(String.valueOf(5000));
+        clickElement(appleCheckbox);
         wait.until(ExpectedConditions.elementToBeClickable(appleCheckbox)).click();
-        Thread.sleep(1000);
+//        Thread.sleep(1000);
         wait.until(ExpectedConditions.elementToBeClickable(screenSizeCheckbox)).click();
-        Thread.sleep(1000);
+//        Thread.sleep(1000);
         driver.navigate().refresh();
-        Thread.sleep(3000);
+//        Thread.sleep(3000);
     }
 
     public void clickMostExpensiveProduct() {
@@ -75,9 +81,9 @@ public class TabletPage {
 
         if (mostExpensiveProduct != null) {
             try {
-                String productXPath = String.format("(//ul[(@id='1')]/li)[%d]", maxPriceIndex + 1);
+                String productXPath = String.format("(//ul[(@id='1')]/li)[%d]", maxPriceIndex + 2);
                 WebElement productToClick = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(productXPath)));
-                Thread.sleep(3000);
+                Thread.sleep(5000);
                 productToClick.click();
                 productToClick.click();
             } catch (Exception e) {
